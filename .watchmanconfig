@@ -5,6 +5,17 @@
     ".expo",
     ".next",
     "dist",
-    "web-build"
-  ]
+    "web-build",
+    "app/tempobook",
+    "tempobook",
+    "assets",
+    ".github",
+    "__tests__",
+    "coverage",
+    "android",
+    "ios"
+  ],
+  "root_files": true,
+  "fsevents_latency": 0.05,
+  "settle": 5000
 }

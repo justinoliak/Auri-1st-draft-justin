@@ -1,19 +1,19 @@
-import { View, Text } from "react-native";
-import { useRouter, Redirect } from "expo-router";
 import { ErrorBoundary } from "react-error-boundary";
+import { View, Text } from "react-native";
+import WelcomeScreen from "../screens/WelcomeScreen";
 
 function ErrorFallback() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Something went wrong. Please restart the app.</Text>
+      <Text>Error loading welcome screen. Please restart the app.</Text>
     </View>
   );
 }
 
-export default function Index() {
+export default function Welcome() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <Redirect href="/welcome" />
+      <WelcomeScreen />
     </ErrorBoundary>
   );
 }

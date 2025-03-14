@@ -32,18 +32,23 @@ interface BottomNavigationProps {
 export default function BottomNavigation({
   activeTab = "home",
   onTabPress = (tab) => {
-    // Handle navigation based on tab
-    if (tab === "home") {
-      // Navigate to home
-      const { router } = require("expo-router");
-      router.push("/home");
-    } else if (tab === "calendar") {
-      // Navigate to calendar
-      const { router } = require("expo-router");
-      router.push("/calendar");
-    } else if (tab === "analytics") {
-      // Navigate to analytics (not implemented yet)
-      console.log("Analytics tab pressed");
+    // Get router instance
+    const router = require("expo-router").useRouter();
+
+    // Navigate based on tab
+    switch (tab) {
+      case "home":
+        router.push("/home");
+        break;
+      case "calendar":
+        router.push("/calendar");
+        break;
+      case "analytics":
+        // Not implemented yet
+        console.log("Analytics tab pressed");
+        break;
+      default:
+        break;
     }
   },
 }: BottomNavigationProps) {

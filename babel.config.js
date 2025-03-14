@@ -1,17 +1,27 @@
 module.exports = function (api) {
   api.cache(true);
-
-  const plugins = [];
-
-  if (process.env.EXPO_PUBLIC_TEMPO) {
-    plugins.push(["tempo-devtools/dist/babel-plugin"]);
-  }
-
   return {
-    presets: [
-      ["babel-preset-expo", { jsxImportSource: "nativewind" }],
-      "nativewind/babel",
+    presets: ["babel-preset-expo"],
+    plugins: [
+      // Enable path aliases
+      [
+        "module-resolver",
+        {
+          root: ["./"],
+          alias: {
+            "@": "./",
+            "@components": "./components",
+            "@screens": "./screens",
+            "@theme": "./theme",
+            "@assets": "./assets",
+          },
+          extensions: [".js", ".jsx", ".ts", ".tsx"],
+        },
+      ],
+      // Add Tempo plugin conditionally
+      ...(process.env.EXPO_PUBLIC_TEMPO
+        ? ["tempo-devtools/dist/babel-plugin"]
+        : []),
     ],
-    plugins,
   };
 };
