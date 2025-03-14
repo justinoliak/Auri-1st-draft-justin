@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import Button from "../ui/Button";
 import theme from "@/theme";
+import { useRouter } from "expo-router";
 
 /**
  * WelcomeActions Component
@@ -25,20 +26,35 @@ interface WelcomeActionsProps {
 
 export default function WelcomeActions({
   onSignIn = () => {},
-  onGetStarted = () => {},
+  onGetStarted,
 }: WelcomeActionsProps) {
+  const router = useRouter();
+
+  const handleSignIn = () => {
+    onSignIn();
+    router.push("/signin");
+  };
+
+  const handleGetStarted = () => {
+    if (onGetStarted) {
+      onGetStarted();
+    } else {
+      router.push("/signin");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Button
         label="Sign in"
         variant="outline"
-        onPress={onSignIn}
+        onPress={handleSignIn}
         accessibilityLabel="Sign in button"
       />
       <Button
         label="Get started"
         variant="primary"
-        onPress={onGetStarted}
+        onPress={handleGetStarted}
         accessibilityLabel="Get started button"
       />
     </View>
